@@ -15,8 +15,8 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Force Next.js Static Export
-        run: npx next build
+      - name: Force Static Build with Overrides
+        run: NODE_OPTIONS="--no-warnings" npx next build
         env:
           NEXT_PRIVATE_LOCAL_WEBPACK: "true"
 
