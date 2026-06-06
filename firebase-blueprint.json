@@ -1,0 +1,52 @@
+{
+  "entities": {
+    "StudyData": {
+      "title": "Study Data",
+      "description": "Unified state for the user's study tracker including missions, stats, academic vault, and permanent persona context.",
+      "type": "object",
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string" },
+              "completed": { "type": "boolean" },
+              "createdAt": { "type": "number" }
+            }
+          }
+        },
+        "stats": {
+          "type": "object",
+          "properties": {
+            "totalFocusMinutes": { "type": "number" },
+            "todayFocusMinutes": { "type": "number" },
+            "completedTasksCount": { "type": "number" },
+            "dailyStreak": { "type": "number" },
+            "lastActiveDay": { "type": "string" },
+            "dailyFocusGoal": { "type": "number" },
+            "permanentIdentity": { "type": "string", "description": "The user's permanent study persona provided to AI for context." },
+            "dailyHistory": { 
+              "type": "object",
+              "additionalProperties": { "type": "number" }
+            }
+          }
+        },
+        "projects": { 
+          "type": "array",
+          "description": "The full academic hierarchy: Class > Subject > Chapter > Lecture."
+        }
+      }
+    }
+  },
+  "auth": {
+    "providers": ["google.com", "password"]
+  },
+  "firestore": {
+    "/users/{userId}/data/main": {
+      "schema": "StudyData",
+      "description": "The primary data document for each student user containing all vault and session data."
+    }
+  }
+}

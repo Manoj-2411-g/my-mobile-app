@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%; /* Pure AMOLED Black */
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 268 96% 76%; /* Vibrant Purple */
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 174 97% 43%; /* Cyber Teal */
+    --secondary-foreground: 240 10% 3.9%;
+    --muted: 240 3.7% 10%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 268 96% 76%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 268 96% 76%;
+    --radius: 1.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground font-body overflow-hidden select-none touch-none h-[100dvh] w-full;
+  }
+}
+
+.glow-primary {
+  filter: drop-shadow(0 0 12px hsla(268, 96%, 76%, 0.4));
+}
+
+.glow-secondary {
+  filter: drop-shadow(0 0 12px hsla(174, 97%, 43%, 0.4));
+}
+
+.aura-pulse {
+  animation: aura-pulse 6s ease-in-out infinite;
+}
+
+@keyframes aura-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.15; filter: blur(80px); }
+  50% { transform: scale(1.2); opacity: 0.3; filter: blur(120px); }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  @apply bg-white/5 backdrop-blur-2xl border border-white/10;
+}
