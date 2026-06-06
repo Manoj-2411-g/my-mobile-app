@@ -15,8 +15,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Web Assets
-        run: npm run build
+      - name: Force Next.js Static Export
+        run: npx next build
+        env:
+          NEXT_PRIVATE_LOCAL_WEBPACK: "true"
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -27,13 +29,13 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Sync Capacitor
+      - name: Sync Capacitor Channels
         run: npx cap sync
 
       - name: Make Gradle Executable
         run: chmod +x android/gradlew
 
-      - name: Build APK with Gradle
+      - name: Compile Production APK
         run: cd android && ./gradlew assembleDebug
 
       - name: Upload Finished APK
