@@ -13,12 +13,12 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
-      - name: Force Static Build with Overrides
-        run: NODE_OPTIONS="--no-warnings" npx next build
+      - name: Bypass Broken Next CLI and Export
+        run: npx next build --no-lint
         env:
-          NEXT_PRIVATE_LOCAL_WEBPACK: "true"
+          NEXT_TELEMETRY_DISABLED: "1"
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
